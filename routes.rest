@@ -1,0 +1,60 @@
+// =========================================
+// LOCALHOST ENVIRONMENT - COUNTRIES API
+// =========================================
+
+### Home
+GET http://localhost:3000/
+
+### Get all countries
+GET http://localhost:3000/countries
+
+### Get country by ID
+# @prompt id Enter the country ID:
+GET http://localhost:3000/countries/{{id}}
+
+### Create a new country
+# @prompt name Enter the country name:
+# @prompt capital Enter the capital:
+# @prompt population Enter the population:
+# @prompt officialLanguage Enter the official language:
+# @prompt currency Enter the currency:
+# @prompt region Enter the region:
+# @prompt areaKm2 Enter the area in Km2:
+POST http://localhost:3000/countries
+Content-Type: application/json
+
+{
+  "name": "{{name}}",
+  "capital": "{{capital}}",
+  "population": "{{population}}",
+  "officialLanguage": "{{officialLanguage}}",
+  "currency": "{{currency}}",
+  "region": "{{region}}",
+  "areaKm2": "{{areaKm2}}"
+}
+
+### Update a country
+# @prompt id Enter the country ID to update:
+# @prompt name Enter the new name:
+# @prompt capital Enter the new capital:
+# @prompt population Enter the new population:
+# @prompt officialLanguage Enter the new official language:
+# @prompt currency Enter the new currency:
+# @prompt region Enter the new region:
+# @prompt areaKm2 Enter the new area in Km2:
+PUT http://localhost:3000/countries/{{id}}
+Content-Type: application/json
+
+{
+  "name": "{{name}}",
+  "capital": "{{capital}}",
+  "population": "{{population}}",
+  "officialLanguage": "{{officialLanguage}}",
+  "currency": "{{currency}}",
+  "region": "{{region}}",
+  "areaKm2": "{{areaKm2}}"
+}
+
+### Delete a country
+# @prompt id Enter the country ID to delete:
+DELETE http://localhost:3000/countries/{{id}}
