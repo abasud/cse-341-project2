@@ -5,8 +5,8 @@ const doc = {
     title: 'Countries API',
     description: 'Documentation for CSE341 Project 2',
   },
-  host: 'localhost:3000',
-  schemes: ['http'],
+  host: 'cse-341-project2-204m.onrender.com',
+  schemes: ['https'],
  
   definitions: {
     Country: {
