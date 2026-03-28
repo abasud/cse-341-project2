@@ -1,12 +1,11 @@
 import express from 'express';
 const router = express.Router();
-import { errorHandler } from '../utilities/error-handling.js';
 import { validateCountry } from '../utilities/countries-validation.js';
 
-import * as countriesController from '../controllers/countries.js';
+import * as countriesController from '../controllers/countriesController.js';
 
-router.get('/', errorHandler(countriesController.getAll));
-router.get('/:id', errorHandler(countriesController.getSingle));
+router.get('/', countriesController.getAllCountries);
+router.get('/:id', countriesController.getSingleCountry);
 
 router.post(
     '/',
@@ -17,7 +16,7 @@ router.post(
         schema: { $ref: '#/definitions/Country' }
     } */
     validateCountry, 
-    errorHandler(countriesController.createCountry)
+    countriesController.createCountry
 );
 
 router.put(
@@ -30,9 +29,9 @@ router.put(
         schema: { $ref: '#/definitions/Country' }
     } */
     validateCountry, 
-    errorHandler(countriesController.updateCountry)
+    countriesController.updateCountry
 );
 
-router.delete('/:id', errorHandler(countriesController.deleteCountry));
+router.delete('/:id', countriesController.deleteCountry);
 
 export default router;
