@@ -11,6 +11,8 @@ dotenv.config();
 
 const app = express();
 
+app.enable('trust proxy');
+
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
