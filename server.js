@@ -1,19 +1,37 @@
 import express from 'express';
+import session from 'express-session';
 import dotenv from 'dotenv';
 import connectDB from './data/database.js';
+
+import passport from './utilities/passport.js';
+import authRoutes from './routes/authRoute.js';
 import router from './routes/index.js';
 
 dotenv.config();
+
 const app = express();
+
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: process.env.NODE_ENV === 'production'
+    }
+}));
+
+app.use(express.json());
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/', router); 
+app.use('/auth', authRoutes);
 
 connectDB()
     .then((database) => {
         app.locals.db = database;
         console.log("✅ Database linked to app.locals.db");
     });
-
-app.use(express.json());
-app.use('/', router); 
 
 // Error handling
 app.use((req, res, next) => {

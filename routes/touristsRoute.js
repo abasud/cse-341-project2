@@ -1,6 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import { validateTourist } from '../utilities/tourists-validation.js';
+import { isAuthenticated } from '../utilities/auth.js';
 
 import * as touristsController from '../controllers/touristsController.js';
 
@@ -16,6 +17,7 @@ router.post(
         required: true,
         schema: { $ref: '#/definitions/Tourist' }
     } */
+    isAuthenticated,
     validateTourist, 
     touristsController.createTourist
 );
@@ -29,10 +31,11 @@ router.put(
         required: true,
         schema: { $ref: '#/definitions/Tourist' }
     } */
+    isAuthenticated,
     validateTourist, 
     touristsController.updateTourist
 );
 
-router.delete('/:id', touristsController.deleteTourist);
+router.delete('/:id', isAuthenticated, touristsController.deleteTourist);
 
 export default router;

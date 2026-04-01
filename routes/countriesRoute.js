@@ -1,6 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import { validateCountry } from '../utilities/countries-validation.js';
+import { isAuthenticated } from '../utilities/auth.js';
 
 import * as countriesController from '../controllers/countriesController.js';
 
@@ -15,6 +16,7 @@ router.post(
         required: true,
         schema: { $ref: '#/definitions/Country' }
     } */
+    isAuthenticated,
     validateCountry, 
     countriesController.createCountry
 );
@@ -28,10 +30,11 @@ router.put(
         required: true,
         schema: { $ref: '#/definitions/Country' }
     } */
+    isAuthenticated,
     validateCountry, 
     countriesController.updateCountry
 );
 
-router.delete('/:id', countriesController.deleteCountry);
+router.delete('/:id', isAuthenticated, countriesController.deleteCountry);
 
 export default router;
